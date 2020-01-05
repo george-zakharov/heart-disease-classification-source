@@ -65,7 +65,7 @@ def main():
             dic = df.to_dict('list')
             temp = loaded_model.predict(df)
 
-        return render_template('main_print.html', data=dic, result=temp)
+        return render_template('main_result.html', data=dic, result=temp)
 
 
 if __name__ == '__main__':
