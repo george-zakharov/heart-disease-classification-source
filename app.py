@@ -3,7 +3,7 @@ from flask import render_template
 import pickle
 import sklearn
 import random
-import pandas
+import pandas as pd
 
 app = flask.Flask(__name__, template_folder='templates')
 
@@ -18,9 +18,6 @@ def main():
         temp = 1
         with open('model.pickle', 'rb') as fh:
             loaded_model = pickle.load(fh)
-
-        with open('scaler.pickle', 'rb') as fh:
-            scaler = pickle.load(fh)
 
         with open('unique.pickle', 'rb') as fh:
             unique = pickle.load(fh)
@@ -41,19 +38,19 @@ def main():
 
             return df
 
-        def generate_random_values(carat_unique, cut_unique, color_unique, clarity_unique, depth_unique, table_unique,
-                                   x_unique, y_unique, z_unique):
-
+        def generate_random_values(oldpeak, thalach, age, trestbps, chol, thal, cp, ca, exang, slope):
             df = pd.DataFrame({
-                'carat': random.choice(carat_unique),
-                'cut': random.choice(cut_unique),
-                'color': random.choice(color_unique),
-                'clarity': random.choice(clarity_unique),
-                'depth': random.choice(depth_unique),
-                'table': random.choice(table_unique),
-                'x': random.choice(x_unique),
-                'y': random.choice(y_unique),
-                'z': [random.choice(z_unique)]})
+                'oldpeak': random.choice(oldpeak),
+                'thalach': random.choice(thalach),
+                'age': random.choice(age),
+                'trestbps': random.choice(trestbps),
+                'chol': random.choice(chol),
+                'thal': random.choice(thal),
+                'cp': random.choice(cp),
+                'ca': random.choice(ca),
+                'exang': random.choice(exang),
+                'slope': random.choice(slope)
+            }, index=[0])
 
             return df
 
@@ -61,12 +58,12 @@ def main():
             dic = flask.request.form.to_dict(flat=False)
             del dic['Send']
             df = pd.DataFrame(dic)
-            temp = loaded_model.predict(transform_data(df, scaler, unique))
+            temp = loaded_model.predict(df)
 
         elif 'Generate' in flask.request.form:
             df = generate_random_values(*unique.values())
             dic = df.to_dict('list')
-            temp = loaded_model.predict(transform_data(df, scaler, unique))
+            temp = loaded_model.predict(df)
 
         return render_template('main_print.html', data=dic, result=temp)
 

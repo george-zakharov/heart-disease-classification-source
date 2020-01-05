@@ -3,3 +3,4 @@ flask
 gunicorn
 pickle-mixin
 scikit-learn
+Jinja2
