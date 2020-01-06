@@ -19,6 +19,7 @@ def main():
 
         if 'Send' in flask.request.form:
             dic = flask.request.form.to_dict(flat=False)
+            print(dic)
             del dic['Send']
             df = pd.DataFrame(dic)
             temp = loaded_model.predict(df)
