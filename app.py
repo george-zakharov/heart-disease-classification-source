@@ -1,7 +1,6 @@
 import flask
 from flask import render_template
 import pickle
-import random
 import pandas as pd
 
 app = flask.Flask(__name__, template_folder='templates')

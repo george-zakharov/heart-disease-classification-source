@@ -15,31 +15,45 @@ form {
 <head>
     <title>Heart Disease</title>
 </head>
+<script>
+    function getRandomValues() {
+        document.getElementById('oldpeak').value = (Math.random() * (1.000000 - 0.000000) + 0.000000).toFixed(6);
+        document.getElementById('thalach').value = (Math.random() * (0.923664 - 0.000000) + 0.000000).toFixed(6);
+        document.getElementById('age').value = (Math.random() * (0.875000 - 0.180040) + 0.180040).toFixed(6);
+        document.getElementById('trestbps').value = (Math.random() * (1.000000 - 0.075472) + 0.075472).toFixed(6);
+        document.getElementById('chol').value = (Math.random() * (0.798762 - 0.000000) + 0.000000).toFixed(6);
+        document.getElementById('thal').value = (Math.random() * (7 - 0) + 0).toFixed(0);
+        document.getElementById('cp').value = (Math.random() * (4 - 0) + 0).toFixed(0);
+        document.getElementById('ca').value = (Math.random() * (3 - 0) + 0).toFixed(0);
+        document.getElementById('exang').value = (Math.random() * (1 - 0) + 0).toFixed(0);
+        document.getElementById('slope').value = (Math.random() * (3 - 0) + 0).toFixed(0);
+    }
+</script>
 <form action="{{ url_for('main') }}" method="POST">
     <fieldset>
         <legend>Heart Disease Features:</legend>
         oldpeak:
-        <input name="oldpeak" type="number"  step="0.000001" required>
+        <input id="oldpeak" name="oldpeak" type="number"  step="0.000001" required>
         ST depression induced by exercise relative to rest ('ST' relates to * positions on the ECG plot. See more here)
         <br>
         thalach:
-        <input name="thalach" type="number"  step="0.000001" required>
+        <input id="thalach" name="thalach" type="number"  step="0.000001" required>
         The person's maximum heart rate achieved
         <br>
         age:
-        <input name="age" type="number"  step="1" required>
+        <input id="age" name="age" type="number"  step="0.000001" required>
         The person's age in years
         <br>
         trestbps:
-        <input name="trestbps" type="number"  step="0.000001" required>
+        <input id="trestbps" name="trestbps" type="number"  step="0.000001" required>
         The person's resting blood pressure (mm Hg on admission to the hospital)
         <br>
         chol:
-        <input name="chol" type="number"  step="0.000001" required>
+        <input id="chol" name="chol" type="number"  step="0.000001" required>
         The person's cholesterol measurement in mg/dl
         <br>
         thal:
-        <select name="thal">
+        <select id="thal" name="thal">
             <option value="0">No Data</option>
             <option value="3">Normal</option>
             <option value="6">Fixed Defect</option>
@@ -48,7 +62,7 @@ form {
         A blood disorder called thalassemia
         <br>
         cp:
-        <select name="cp">
+        <select id="cp" name="cp">
             <option value="0">No Data</option>
             <option value="1">Typical Angina</option>
             <option value="2">Atypical Angina</option>
@@ -58,18 +72,18 @@ form {
         The chest pain experienced
         <br>
         ca:
-        <input name="ca" type="number"  step="1" required>
+        <input id="ca" name="ca" type="number"  step="1" required>
         The number of major vessels (0-3)
         <br>
         exang:
-        <select name="exang">
+        <select id="exang" name="exang">
             <option value="0">No</option>
             <option value="1">Yes</option>
         </select>
         Exercise induced angina (1 = yes; 0 = no)
         <br>
         slope:
-        <select name="slope">
+        <select id="slope" name="slope">
             <option value="0">No Data</option>
             <option value="1">Upsloping</option>
             <option value="2">Flat</option>
@@ -78,17 +92,17 @@ form {
         the slope of the peak exercise ST segment (Value 1: upsloping, Value 2: flat, Value 3: downsloping)
         <br>
         <br>
-        <input type="submit" name="Send"  value="Send">
+        <input type="submit" name="Send" value="Send">
         <br>
         Generate random values:
-        <input type="submit" name="Generate" value="Generate" formnovalidate>
+        <button type="button" onclick="getRandomValues()">Generate random values</button>
     </fieldset>
 </form>
 
 
 <div class="result" align="center">
     {% if result %}
-        <br> <p style="font-size:50px">Estimated price:</p>
+        <br> <p style="font-size:50px">Result class:</p>
         <p style="font-size:50px">{{ result }}</p>
     {% endif %}
 </div>
