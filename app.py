@@ -28,9 +28,9 @@ def main():
             ]])
             if temp is not None:
                 if temp[0] == 0:
-                    temp = 'No decease, predicted class - 0'
+                    temp = 'No disease, predicted class - 0'
                 else:
-                    temp = 'There is a decease, predicted class - 1'
+                    temp = 'There is a disease, predicted class - 1'
 
         return render_template('main.html', result=temp)
 
