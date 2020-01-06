@@ -11,7 +11,7 @@ app = flask.Flask(__name__, template_folder='templates')
 def main():
     temp = 'no data'
     if flask.request.method == 'GET':
-        return render_template('main.html')
+        return render_template('main.html', result=temp)
 
     if flask.request.method == 'POST':
         with open('model.pkl', 'rb') as fh:
