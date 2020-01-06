@@ -19,11 +19,11 @@ def main():
 
         if 'Send' in flask.request.form:
             dic = flask.request.form.to_dict(flat=False)
-            #del dic['Send']
+            del dic['Send']
             df = pd.DataFrame(dic)
             temp = loaded_model.predict(df)
 
-        return render_template('main.html', result=dic)
+        return render_template('main.html', result=temp)
 
 
 if __name__ == '__main__':
