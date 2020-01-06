@@ -13,13 +13,13 @@ def main():
         return render_template('main.html')
 
     if flask.request.method == 'POST':
-        temp = 1
+        temp = 0
         with open('model.pkl', 'rb') as fh:
             loaded_model = pickle.load(fh)
 
         if 'Send' in flask.request.form:
             dic = flask.request.form.to_dict(flat=False)
-            del dic['Send']
+            # del dic['Send']
             df = pd.DataFrame(dic)
             temp = loaded_model.predict(df)
 
