@@ -17,15 +17,14 @@ def main():
             loaded_model = pickle.load(fh)
 
         if 'Send' in flask.request.form:
-            dic = flask.request.form.to_dict(flat=False)
-            if 'thal' not in dic:
-                # And yes, we need this line to fix some input issues, cuz this key can randomly be empty
-                dic['thal'] = '0'
+            response = flask.request.form.to_dict(flat=False)
+            if 'thal' not in response:
+                response['thal'] = '0'
 
             temp = loaded_model.predict([[
-                float(dic['thalach'][0]), float(dic['oldpeak'][0]), float(dic['age'][0]), float(dic['chol'][0]),
-                float(dic['trestbps'][0]), int(dic['thal'][0]), int(dic['cp'][0]), int(dic['ca'][0]),
-                int(dic['exang'][0]), int(dic['slope'][0])
+                float(response['thalach'][0]), float(response['oldpeak'][0]), float(response['age'][0]),
+                float(response['chol'][0]), float(response['trestbps'][0]), int(response['thal'][0]),
+                int(response['cp'][0]), int(response['ca'][0]), int(response['exang'][0]), int(response['slope'][0])
             ]])
             if temp is not None:
                 if temp[0] == 0:
