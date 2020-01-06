@@ -13,7 +13,7 @@ def main():
         return render_template('main.html')
 
     if flask.request.method == 'POST':
-        temp = 0
+        temp = 'no data'
         with open('model.pkl', 'rb') as fh:
             loaded_model = pickle.load(fh)
 
