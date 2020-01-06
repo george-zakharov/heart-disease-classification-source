@@ -15,7 +15,7 @@ def main():
 
     if flask.request.method == 'POST':
         temp = 1
-        with open('model.pickle', 'rb') as fh:
+        with open('model.pkl', 'rb') as fh:
             loaded_model = pickle.load(fh)
 
         if 'Send' in flask.request.form:
